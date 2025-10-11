@@ -5,6 +5,11 @@
 
 A lightweight, Windows-focused screen recorder built in Python using FFmpeg. Capture your desktop, system audio (via Virtual Audio Cable), and microphone with built-in audio enhancements like volume boosting, noise reduction, and mixing. Outputs high-quality, timestamped MP4 files—perfect for tutorials, demos, gameplay, or quick shares!
 Failed to load imageView link (Replace with a screenshot of the colorful banner)
+### 🆕 Version 1.2 (October 2025)
+- Added Pause & Resume recording feature 🎬
+- Improved console output colors
+- Minor bug fixes and optimizations
+
 ## ✨ Features
 
 - Desktop Capture: Records full screen at 60 FPS using GDI Grab.
@@ -125,3 +130,4 @@ pyinstaller --onefile --add-data "ffmpeg.exe;." recorder.py
 - Shoutout to VB-Audio for Virtual Cable—essential for system sound!
 
 ### Star ⭐ if this saves your screen-recording workflow! Questions? Open an issue.
+
