@@ -1,8 +1,14 @@
+__version__ = "1.2"
+
+
 import subprocess
 import re
 import datetime
 import sys
 import os
+import psutil
+import msvcrt
+import time
 
 # 🔹 Terminal colorizer
 def colorize(text, color):
@@ -28,6 +34,9 @@ else:
 
 # 🔹 Display warning box before start
 def print_warning_box():
+    print(colorize("Code_By :","GREEN_BOLD")+colorize(" MS Coder","YELLOW_BOLD"))
+    print(colorize("Version :", "GREEN_BOLD") + colorize(" v1.2", "YELLOW_BOLD"))
+
     warning = """
 ⚠️ WARNING - READ CAREFULLY ⚠️
 
@@ -139,13 +148,51 @@ print(colorize("===============================\n", "GREEN_BOLD"))
 choice = input(colorize("Enter your choice: ", "CYAN_BOLD")).strip()
 
 if choice == "1":
-    print(colorize("\n🎥 Starting screen recording...", "CYAN_BOLD"))
-    print(colorize("Press Ctrl + C to stop recording or (q) for safe.\n", "YELLOW_BOLD"))
-    subprocess.run(command)
-    print(colorize(f"✅ Recording saved as {filename}", "GREEN_BOLD"))
+    print(colorize("🎥 Recording started! Press [P] to Pause/Resume, [Q] to Stop.\n", "YELLOW_BOLD"))
+
+    # 🧩 Start recording
+    process = subprocess.Popen(command, stdin=subprocess.PIPE)
+    paused = False
+
+    try:
+        while True:
+            if msvcrt.kbhit():  # detect keypress instantly
+                key = msvcrt.getch().decode("utf-8").lower()
+                if key == "p":
+                    if not paused:
+                        print(colorize("⏸️  Paused recording...", "RED_BOLD"))
+                        for child in psutil.Process(process.pid).children(recursive=True):
+                            child.suspend()
+                        psutil.Process(process.pid).suspend()
+                        paused = True
+                    else:
+                        print(colorize("▶️  Resumed recording...", "GREEN_BOLD"))
+                        for child in psutil.Process(process.pid).children(recursive=True):
+                            child.resume()
+                        psutil.Process(process.pid).resume()
+                        paused = False
+
+                elif key == "q":
+                    print(colorize("🛑 Stopping recording gracefully...", "YELLOW_BOLD"))
+                    process.stdin.write(b"q")
+                    process.stdin.flush()
+                    process.wait()
+                    break
+
+            time.sleep(0.2)
+
+    except KeyboardInterrupt:
+        process.stdin.write(b"q")
+        process.stdin.flush()
+        process.wait()
+
+    print(colorize(f"✅ Recording saved as: {filename}", "GREEN_BOLD"))
+
 
 elif choice == "2":
     print(colorize("\n👋 Thanks for using the Screen Recorder!", "YELLOW_BOLD"))
     sys.exit(0)
 else:
     print(colorize("\n❌ Invalid choice! Please run again.", "RED_BOLD"))
+
+
