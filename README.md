@@ -1,7 +1,7 @@
 ## PyFF Recorder 🎥
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Made with Love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red.svg)](https://github.com/yourusername/pytray-reminder)
+[![Made with Love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red.svg)](https://github.com/mscoder-py/pytray-reminder)
 
 A lightweight, Windows-focused screen recorder built in Python using FFmpeg. Capture your desktop, system audio (via Virtual Audio Cable), and microphone with built-in audio enhancements like volume boosting, noise reduction, and mixing. Outputs high-quality, timestamped MP4 files—perfect for tutorials, demos, gameplay, or quick shares!
 Failed to load imageView link (Replace with a screenshot of the colorful banner)
@@ -130,4 +130,5 @@ pyinstaller --onefile --add-data "ffmpeg.exe;." recorder.py
 - Shoutout to VB-Audio for Virtual Cable—essential for system sound!
 
 ### Star ⭐ if this saves your screen-recording workflow! Questions? Open an issue.
+
 
