@@ -33,6 +33,7 @@ Mixes system and mic audio seamlessly.
 - FFmpeg: Installed via WinGet or similar (script auto-detects path).
 - Virtual Audio Cable: For system audio capture (free from VB-Audio).
 - No additional Python packages required—pure stdlib!
+- No need for advance Python knowledge.
 ## Install dependencies quickly:
 
 ```bash
